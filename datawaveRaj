@@ -1,0 +1,56 @@
+backupSomething
+
+%dw 1.0
+%output application/xml encoding="UTF-8"
+%namespace soap http://www.w3.org/2003/05/soap-envelope
+%namespace wsa http://www.w3.org/2005/08/addressing  
+%namespace atl http://atlas.countrywide.com
+%namespace sfl https://bac.com/wsdl/SFLeadAdapterService/SFLeadAdapterService
+
+---
+soap#Envelope @(wsa#wsa:"http://www.w3.org/2005/08/addressing" ,atl#atl:"http://atlas.countrywide.com", sfl#sfl:"https://bac.com/wsdl/SFLeadAdapterService/SFLeadAdapterService"  ): {
+	soap#Header :
+	{
+		Security @(xmlns:"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd") : payload,
+		wsa#ReplyTo @(soap#mustUnderstand:"1"): flowVars.actualPayload.Envelope.Header.ReplyTo,
+		wsa#To : flowVars.actualPayload.Envelope.Header.To,
+		wsa#Action : flowVars.actualPayload.Envelope.Header.Action,
+		RequestHeader : flowVars.actualPayload.Envelope.Header.RequestHeader
+		
+	},
+	
+	soap#Body :flowVars.actualPayload.Envelope.Body
+	
+	
+} 
+
+
+===========================
+
+somethinhg
+
+
+%dw 1.0
+%output application/xml encoding="UTF-8"
+%namespace soap http://www.w3.org/2003/05/soap-envelope
+%namespace wsa http://www.w3.org/2005/08/addressing  
+%namespace atl http://atlas.countrywide.com
+%namespace sfl https://bac.com/wsdl/SFLeadAdapterService/SFLeadAdapterService
+
+---
+soap#Envelope : {
+	soap#Header :
+	{
+		Security @(xmlns:"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd") : payload,
+		wsa#ReplyTo @(soap#mustUnderstand:"1"): flowVars.actualPayload.Envelope.Header.ReplyTo,
+		wsa#To : flowVars.actualPayload.Envelope.Header.To,
+		wsa#Action : flowVars.actualPayload.Envelope.Header.Action,
+		RequestHeader : flowVars.actualPayload.Envelope.Header.RequestHeader
+		
+	},
+	
+	soap#Body :flowVars.actualPayload.Envelope.Body
+	
+	
+} 
+
